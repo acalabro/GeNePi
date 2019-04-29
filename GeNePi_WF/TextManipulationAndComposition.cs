@@ -14,5 +14,10 @@ namespace ProtoLeaf_WF
             return "asd";
         }
 
+        private void PutTextOnABookmark(Microsoft.Office.Interop.Word.Document theWordDocument, String bookmarkName, String text)
+        {
+
+        }
+
     }
 }

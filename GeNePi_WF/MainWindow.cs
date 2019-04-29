@@ -12,39 +12,36 @@ namespace ProtoLeaf_WF
 {
     public partial class MainWindow : Form
     {
-        private int childFormNumber = 0;
-
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
 
         public MainWindow(int width, int heigth)
         {
-            /*
+            
             SplashScreen loader = new SplashScreen();
             this.Size = new Size(648, 492);
             loader.ShowDialog();
 
             this.Width = width;
             this.Height = heigth;
-            */
+            
             InitializeComponent();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
         {
-            Form childForm = new Form();
-            childForm.MdiParent = this;
-            childForm.Text = "Finestra " + childFormNumber++;
-            childForm.Show();
+            Form asd = new Form
+            {
+                MdiParent = this
+            };
+            asd.Show();
+
         }
 
         private void OpenFile(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            openFileDialog.Filter = "File di testo (*.txt)|*.txt|Tutti i file (*.*)|*.*";
+            OpenFileDialog openFileDialog = new OpenFileDialog {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                Filter = "File di testo (*.txt)|*.txt|Tutti i file (*.*)|*.*"
+            };
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
@@ -53,9 +50,10 @@ namespace ProtoLeaf_WF
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            saveFileDialog.Filter = "File di testo (*.txt)|*.txt|Tutti i file (*.*)|*.*";
+            SaveFileDialog saveFileDialog = new SaveFileDialog {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
+                Filter = "File di testo (*.txt)|*.txt|Tutti i file (*.*)|*.*"
+            };
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = saveFileDialog.FileName;
@@ -124,9 +122,35 @@ namespace ProtoLeaf_WF
 
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {
-            Skill skill = new Skill();
-            skill.MdiParent = this;
+            Skill skill = new Skill {
+                MdiParent = this};
             skill.Show();
+        }
+
+        private void wordStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Word.Application wordAPP = new Microsoft.Office.Interop.Word.Application();
+            wordAPP.Visible = true;
+            object missing = System.Reflection.Missing.Value;
+
+            //Create a new document
+            Microsoft.Office.Interop.Word.Document document = wordAPP.Documents.Add(ref missing, ref missing, ref missing, ref missing);
+        }
+
+        private void openBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OfficeForm browser = new OfficeForm{
+                MdiParent = this};
+            browser.Show();
+
+        }
+        private void ToolStripButton2_Click(object sender, EventArgs e)
+        {
+            ProtocolCreation protocolCreate = new ProtocolCreation
+            {
+                MdiParent = this
+            };
+            protocolCreate.Show();
         }
     }
 }

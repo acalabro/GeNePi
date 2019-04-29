@@ -35,9 +35,9 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::ProtoLeaf_WF.Properties.Resources.logo16_cnristi_180x180;
             this.ControlBox = false;
             this.Cursor = System.Windows.Forms.Cursors.No;
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
