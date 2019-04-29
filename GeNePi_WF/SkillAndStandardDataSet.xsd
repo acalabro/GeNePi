@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SkillAndStandardDataSet" targetNamespace="http://tempuri.org/SkillAndStandardDataSet.xsd" xmlns:mstns="http://tempuri.org/SkillAndStandardDataSet.xsd" xmlns="http://tempuri.org/SkillAndStandardDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DBConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="DBConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.ProtoLeaf_WF.Properties.Settings.GlobalReference.Default.DBConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Skill_StandardsTableAdapter" GeneratorDataComponentClassName="Skill_StandardsTableAdapter" Name="Skill_Standards" UserDataComponentName="Skill_StandardsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="DBConnectionString (Settings)" DbObjectName="Sftw.dbo.Skill_Standards" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT [Skill Name], [Short Description], [Standard Name], [Standard Version], Type, Publisher FROM dbo.Skill_Standards</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Skill Name" DataSetColumn="Skill Name" />
+              <Mapping SourceColumn="Short Description" DataSetColumn="Short Description" />
+              <Mapping SourceColumn="Standard Name" DataSetColumn="Standard Name" />
+              <Mapping SourceColumn="Standard Version" DataSetColumn="Standard Version" />
+              <Mapping SourceColumn="Type" DataSetColumn="Type" />
+              <Mapping SourceColumn="Publisher" DataSetColumn="Publisher" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SkillAndStandardDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="SkillAndStandardDataSet" msprop:Generator_UserDSName="SkillAndStandardDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Skill_Standards" msprop:Generator_TableClassName="Skill_StandardsDataTable" msprop:Generator_TableVarName="tableSkill_Standards" msprop:Generator_TablePropName="Skill_Standards" msprop:Generator_RowDeletingName="Skill_StandardsRowDeleting" msprop:Generator_RowChangingName="Skill_StandardsRowChanging" msprop:Generator_RowEvHandlerName="Skill_StandardsRowChangeEventHandler" msprop:Generator_RowDeletedName="Skill_StandardsRowDeleted" msprop:Generator_UserTableName="Skill_Standards" msprop:Generator_RowChangedName="Skill_StandardsRowChanged" msprop:Generator_RowEvArgName="Skill_StandardsRowChangeEvent" msprop:Generator_RowClassName="Skill_StandardsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Skill_x0020_Name" msprop:Generator_ColumnVarNameInTable="columnSkill_Name" msprop:Generator_ColumnPropNameInRow="Skill_Name" msprop:Generator_ColumnPropNameInTable="Skill_NameColumn" msprop:Generator_UserColumnName="Skill Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Short_x0020_Description" msprop:Generator_ColumnVarNameInTable="columnShort_Description" msprop:Generator_ColumnPropNameInRow="Short_Description" msprop:Generator_ColumnPropNameInTable="Short_DescriptionColumn" msprop:Generator_UserColumnName="Short Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Standard_x0020_Name" msprop:Generator_ColumnVarNameInTable="columnStandard_Name" msprop:Generator_ColumnPropNameInRow="Standard_Name" msprop:Generator_ColumnPropNameInTable="Standard_NameColumn" msprop:Generator_UserColumnName="Standard Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Standard_x0020_Version" msprop:Generator_ColumnVarNameInTable="columnStandard_Version" msprop:Generator_ColumnPropNameInRow="Standard_Version" msprop:Generator_ColumnPropNameInTable="Standard_VersionColumn" msprop:Generator_UserColumnName="Standard Version" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Publisher" msprop:Generator_ColumnVarNameInTable="columnPublisher" msprop:Generator_ColumnPropNameInRow="Publisher" msprop:Generator_ColumnPropNameInTable="PublisherColumn" msprop:Generator_UserColumnName="Publisher" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
