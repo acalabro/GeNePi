@@ -88,7 +88,23 @@
       <DependentUpon>connectionTest.dbml</DependentUpon>
     </Compile>
     <Compile Include="DbObjects\AuxiliaryDeviceType.cs" />
+    <Compile Include="DbObjects\BehaviorsToBeTested.cs" />
+    <Compile Include="DbObjects\DefinitionsAndTerms.cs" />
+    <Compile Include="DbObjects\DeviceType.cs" />
+    <Compile Include="DbObjects\Directive.cs" />
+    <Compile Include="DbObjects\Domain.cs" />
+    <Compile Include="DbObjects\Environment.cs" />
+    <Compile Include="DbObjects\Introduction.cs" />
+    <Compile Include="DbObjects\Objectives.cs" />
+    <Compile Include="DbObjects\Password.cs" />
+    <Compile Include="DbObjects\Requirement.cs" />
+    <Compile Include="DbObjects\Role.cs" />
+    <Compile Include="DbObjects\SafetyFunction.cs" />
+    <Compile Include="DbObjects\ScopeAndLimitation.cs" />
     <Compile Include="DbObjects\Skill.cs" />
+    <Compile Include="DbObjects\SkillTargetMetrics.cs" />
+    <Compile Include="DbObjects\Standard.cs" />
+    <Compile Include="DbObjects\User.cs" />
     <Compile Include="DeviceTypeDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
