@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Sftw" Class="connectionTestDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-FO1KP6B\SQLEXPRESS;Initial Catalog=Sftw;Integrated Security=True" SettingsObjectName="ProtoLeaf_WF.Properties.Settings" SettingsPropertyName="DBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Skill" Member="Skill">
+    <Type Name="Skill">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Short_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Definition" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="id_AbstractTargetMetrics" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Skill_Skills_satisfy_Requirements" Member="Skills_satisfy_Requirements" ThisKey="ID" OtherKey="id_Skill" Type="Skills_satisfy_Requirements" />
+      <Association Name="Skill_Protocol_validate_Skill" Member="Protocol_validate_Skill" ThisKey="ID" OtherKey="id_Skill" Type="Protocol_validate_Skill" />
+      <Association Name="Skill_SafetyFunction_realize_Skill" Member="SafetyFunction_realize_Skill" ThisKey="ID" OtherKey="id_Skill" Type="SafetyFunction_realize_Skill" />
+      <Association Name="Skill_Standard_binds_Skills" Member="Standard_binds_Skills" ThisKey="ID" OtherKey="id_Skill" Type="Standard_binds_Skills" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Skills-satisfy-Requirements]" Member="Skills_satisfy_Requirements">
+    <Type Name="Skills_satisfy_Requirements">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_Skill" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_Requirement" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ranking" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Skill_Skills_satisfy_Requirements" Member="Skill" ThisKey="id_Skill" OtherKey="ID" Type="Skill" IsForeignKey="true" />
+      <Association Name="Requirement_Skills_satisfy_Requirements" Member="Requirement" ThisKey="id_Requirement" OtherKey="ID" Type="Requirement" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Requirement" Member="Requirement">
+    <Type Name="Requirement">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Section" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="id_Directive" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Requirement_Skills_satisfy_Requirements" Member="Skills_satisfy_Requirements" ThisKey="ID" OtherKey="id_Requirement" Type="Skills_satisfy_Requirements" />
+      <Association Name="Requirement_Standard_satisfy_Requirements" Member="Standard_satisfy_Requirements" ThisKey="ID" OtherKey="id_Requirement" Type="Standard_satisfy_Requirements" />
+      <Association Name="Directive_Requirement" Member="Directive" ThisKey="id_Directive" OtherKey="ID" Type="Directive" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DeviceType" Member="DeviceType">
+    <Type Name="DeviceType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="DeviceType_AuxiliaryDeviceType" Member="AuxiliaryDeviceType" ThisKey="ID" OtherKey="id_DeviceType" Type="AuxiliaryDeviceType" />
+      <Association Name="DeviceType_Protocol" Member="Protocol" ThisKey="ID" OtherKey="id_DeviceType" Type="Protocol" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AuxiliaryDeviceType" Member="AuxiliaryDeviceType">
+    <Type Name="AuxiliaryDeviceType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_DeviceType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_Environment" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AuxiliaryDeviceType_Protocol" Member="Protocol" ThisKey="ID" OtherKey="id_AuxiliaryDeviceType" Type="Protocol" />
+      <Association Name="DeviceType_AuxiliaryDeviceType" Member="DeviceType" ThisKey="id_DeviceType" OtherKey="ID" Type="DeviceType" IsForeignKey="true" />
+      <Association Name="Environment_AuxiliaryDeviceType" Member="Environment" ThisKey="id_Environment" OtherKey="ID" Type="Environment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Directive" Member="Directive">
+    <Type Name="Directive">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Version" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Publisher" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Publisher_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Directive_Requirement" Member="Requirement" ThisKey="ID" OtherKey="id_Directive" Type="Requirement" />
+      <Association Name="Directive_Domains_is_ruled_by_Directives" Member="Domains_is_ruled_by_Directives" ThisKey="ID" OtherKey="id_Directive" Type="Domains_is_ruled_by_Directives" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="User">
+    <Type Name="User">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Surname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="loginName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="id_Role" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_Password" Member="Password" ThisKey="ID" OtherKey="id_User" Type="Password" />
+      <Association Name="Role_User" Member="Role" ThisKey="id_Role" OtherKey="ID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Domain" Member="Domain">
+    <Type Name="Domain">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Domain_Domains_is_ruled_by_Directives" Member="Domains_is_ruled_by_Directives" ThisKey="ID" OtherKey="id_Domain" Type="Domains_is_ruled_by_Directives" />
+      <Association Name="Domain_Standard" Member="Standard" ThisKey="ID" OtherKey="id_Domain" Type="Standard" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Domains-is_ruled_by-Directives]" Member="Domains_is_ruled_by_Directives">
+    <Type Name="Domains_is_ruled_by_Directives">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_Directive" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_Domain" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Directive_Domains_is_ruled_by_Directives" Member="Directive" ThisKey="id_Directive" OtherKey="ID" Type="Directive" IsForeignKey="true" />
+      <Association Name="Domain_Domains_is_ruled_by_Directives" Member="Domain" ThisKey="id_Domain" OtherKey="ID" Type="Domain" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Environment" Member="Environment">
+    <Type Name="Environment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="location" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Environment_AuxiliaryDeviceType" Member="AuxiliaryDeviceType" ThisKey="ID" OtherKey="id_Environment" Type="AuxiliaryDeviceType" />
+      <Association Name="Environment_Protocol_associated_Environment" Member="Protocol_associated_Environment" ThisKey="ID" OtherKey="id_Environment" Type="Protocol_associated_Environment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Password" Member="Password">
+    <Type Name="Password">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="userPassword" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Association Name="User_Password" Member="User" ThisKey="id_User" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Procedure]" Member="Procedure">
+    <Type Name="Procedure">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="action1" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="action2" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="Procedure_TestPlan" Member="TestPlan" ThisKey="ID" OtherKey="id_Procedure" Type="TestPlan" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Protocol" Member="Protocol">
+    <Type Name="Protocol">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="id_DeviceType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_TestPlan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_AuxiliaryDeviceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_SkillTargetMetrics" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Protocol_Protocol_associated_Environment" Member="Protocol_associated_Environment" ThisKey="ID" OtherKey="id_Protocol" Type="Protocol_associated_Environment" />
+      <Association Name="Protocol_Protocol_validate_Skill" Member="Protocol_validate_Skill" ThisKey="ID" OtherKey="id_Protocol" Type="Protocol_validate_Skill" />
+      <Association Name="AuxiliaryDeviceType_Protocol" Member="AuxiliaryDeviceType" ThisKey="id_AuxiliaryDeviceType" OtherKey="ID" Type="AuxiliaryDeviceType" IsForeignKey="true" />
+      <Association Name="DeviceType_Protocol" Member="DeviceType" ThisKey="id_DeviceType" OtherKey="ID" Type="DeviceType" IsForeignKey="true" />
+      <Association Name="SkillTargetMetrics_Protocol" Member="SkillTargetMetrics" ThisKey="id_SkillTargetMetrics" OtherKey="ID" Type="SkillTargetMetrics" IsForeignKey="true" />
+      <Association Name="TestPlan_Protocol" Member="TestPlan" ThisKey="id_TestPlan" OtherKey="ID" Type="TestPlan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Protocol-associated-Environment]" Member="Protocol_associated_Environment">
+    <Type Name="Protocol_associated_Environment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_Protocol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_Environment" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="booleanValue" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="numericValue" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Protocol_Protocol_associated_Environment" Member="Protocol" ThisKey="id_Protocol" OtherKey="ID" Type="Protocol" IsForeignKey="true" />
+      <Association Name="Environment_Protocol_associated_Environment" Member="Environment" ThisKey="id_Environment" OtherKey="ID" Type="Environment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Protocol-validate-Skill]" Member="Protocol_validate_Skill">
+    <Type Name="Protocol_validate_Skill">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_Protocol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_Skill" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Protocol_Protocol_validate_Skill" Member="Protocol" ThisKey="id_Protocol" OtherKey="ID" Type="Protocol" IsForeignKey="true" />
+      <Association Name="Skill_Protocol_validate_Skill" Member="Skill" ThisKey="id_Skill" OtherKey="ID" Type="Skill" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Role">
+    <Type Name="Role">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Role_User" Member="User" ThisKey="ID" OtherKey="id_Role" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SafetyFunction" Member="SafetyFunction">
+    <Type Name="SafetyFunction">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="SafetyFunction_SafetyFunction_realize_Skill" Member="SafetyFunction_realize_Skill" ThisKey="ID" OtherKey="id_SafetyFunction" Type="SafetyFunction_realize_Skill" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[SafetyFunction-realize-Skill]" Member="SafetyFunction_realize_Skill">
+    <Type Name="SafetyFunction_realize_Skill">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_Skill" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_SafetyFunction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SafetyFunction_SafetyFunction_realize_Skill" Member="SafetyFunction" ThisKey="id_SafetyFunction" OtherKey="ID" Type="SafetyFunction" IsForeignKey="true" />
+      <Association Name="Skill_SafetyFunction_realize_Skill" Member="Skill" ThisKey="id_Skill" OtherKey="ID" Type="Skill" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SkillTargetMetrics" Member="SkillTargetMetrics">
+    <Type Name="SkillTargetMetrics">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="targetMetricOne" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="targetMetricTwo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="SkillTargetMetrics_Protocol" Member="Protocol" ThisKey="ID" OtherKey="id_SkillTargetMetrics" Type="Protocol" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Standard" Member="Standard">
+    <Type Name="Standard">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Version" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Publisher" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Publisher_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="id_Domain" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Standard_Standard_satisfy_Requirements" Member="Standard_satisfy_Requirements" ThisKey="ID" OtherKey="id_Standard" Type="Standard_satisfy_Requirements" />
+      <Association Name="Standard_Standard_binds_Skills" Member="Standard_binds_Skills" ThisKey="ID" OtherKey="id_Standard" Type="Standard_binds_Skills" />
+      <Association Name="Domain_Standard" Member="Domain" ThisKey="id_Domain" OtherKey="ID" Type="Domain" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Standard_satisfy_Requirements" Member="Standard_satisfy_Requirements">
+    <Type Name="Standard_satisfy_Requirements">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_Standard" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_Requirement" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Requirement_Standard_satisfy_Requirements" Member="Requirement" ThisKey="id_Requirement" OtherKey="ID" Type="Requirement" IsForeignKey="true" />
+      <Association Name="Standard_Standard_satisfy_Requirements" Member="Standard" ThisKey="id_Standard" OtherKey="ID" Type="Standard" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Standard-binds-Skills]" Member="Standard_binds_Skills">
+    <Type Name="Standard_binds_Skills">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_Standard" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_Skill" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ranking" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Skill_Standard_binds_Skills" Member="Skill" ThisKey="id_Skill" OtherKey="ID" Type="Skill" IsForeignKey="true" />
+      <Association Name="Standard_Standard_binds_Skills" Member="Standard" ThisKey="id_Standard" OtherKey="ID" Type="Standard" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestPlan" Member="TestPlan">
+    <Type Name="TestPlan">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tp1" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="id_Procedure" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TestPlan_Protocol" Member="Protocol" ThisKey="ID" OtherKey="id_TestPlan" Type="Protocol" />
+      <Association Name="Procedure_TestPlan" Member="Procedure" ThisKey="id_Procedure" OtherKey="ID" Type="Procedure" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
